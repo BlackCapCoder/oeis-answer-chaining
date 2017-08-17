@@ -1,0 +1,6 @@
+f x = sum $ map f [2..n]
+  where f k = g k `div` h k
+        g k = (-1)^k * n * v (2*n-k-1) * v (n-k)
+        h k = v (2*n-2*k) * v (k-2)
+        v n = product [1..n]
+        n = x+1

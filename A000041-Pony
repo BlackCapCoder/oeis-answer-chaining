@@ -1,0 +1,10 @@
+fun f(n: U64, q: U64 = 1): U64 =>
+  if n>0 then
+    if n>=q then
+      f(n-q, q)+f(n,q+1)
+    else
+      0
+    end
+  else
+    1
+  end //a

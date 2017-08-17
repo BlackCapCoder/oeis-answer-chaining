@@ -1,0 +1,1 @@
+f k|n<-k+1=length.filter(==1)$gcd n<$>[1..n]

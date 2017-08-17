@@ -1,0 +1,37 @@
+import Html exposing (text)
+
+f n s = let l = takeWhile (\x -> (s + sqrt (toFloat x)) <= n) (List.range 1 (floor (n*n)))
+        in List.map (\x -> [x]) l 
+        ++ (List.concatMap (\x -> List.map (\y -> x::y) ( f n (s+sqrt (toFloat x)) )) l)
+
+t n = List.length(List.map List.head(group(List.sort(List.map List.sort(f(n+1)0)))))
+
+main = text (toString (List.length (t 5)))
+
+
+takeWhile : (a -> Bool) -> List a -> List a
+takeWhile predicate list =
+  case list of
+    []      -> []
+    x::xs   -> if (predicate x) then x :: takeWhile predicate xs
+              else []
+
+dropWhile : (a -> Bool) -> List a -> List a
+dropWhile predicate list =
+  case list of
+    []      -> []
+    x::xs   -> if (predicate x) then dropWhile predicate xs
+              else list
+
+span : (a -> Bool) -> List a -> (List a, List a)
+span p xs = (takeWhile p xs, dropWhile p xs)
+
+groupBy : (a -> a -> Bool) -> List a -> List (List a)
+groupBy eq zs =
+  case zs of
+    [] -> []
+    (x::xs) -> let (ys,zs) = span (eq x) xs
+              in (x::ys)::groupBy eq zs
+
+group : List a -> List (List a)
+group = groupBy (==)

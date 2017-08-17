@@ -1,0 +1,29 @@
+function f ($n) {
+  $i=12495; $cnt=0; $used =[];
+
+  while (true) {
+    $i++;
+    $ns = [];
+    $v = $i;
+    $sm = $i;
+
+    while (!in_array($v, $ns)) {
+      $ns[] = $v;
+      $s = 0;
+
+      for ($k=1; $k<=$v/2; $k++)
+        if ($v % $k == 0) $s += $k;
+
+      $v = $s;
+      if ($s == 1) break;
+      $sm = min($sm, $v);
+    }
+
+    if ($v < 2) continue;
+    if (in_array($sm, $used)) continue;
+    if ($cnt == $n) return $sm;
+    $cnt++;
+
+    for ($i=0; $i < count($ns); $i++) $used[] = $ns[$i];
+  }
+}

@@ -1,0 +1,1 @@
+f n=[x|x<-[1..],notElem x [y*y|y<-[1..x]]]!!n

@@ -1,0 +1,9 @@
+f = (n) ->
+  ns = [1]
+  for i from 0 to n-1
+    ns.push 0
+    s = 0
+    for k from 0 to ns.length-1
+      s += ns[k]
+      ns[k] =  s
+  ns[ns.length-1]
